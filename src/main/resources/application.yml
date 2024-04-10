@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties.hibernate:
+      enable_lazy_load_no_trans: true
+      format_sql: true
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:4306/rdp
+    username: rdp
+    password: rdp
