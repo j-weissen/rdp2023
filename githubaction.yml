@@ -1,0 +1,35 @@
+name: CI / CD for RDP 2023
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: read
+      checks: write
+
+    runs-on: ubuntu-latest
+
+    # create a docker container for a database (for testing and deployment)!
+    services:
+      mysql:
+        image: mariadb
+        env:
+          MYSQL_ROOT_PASSWORD: rootpwd
+          MYSQL_DATABASE: rdp
+          MYSQL_USER: rdp
+          MYSQL_PASSWORD: rdp
+        ports:
+          - '4306:3306'
+
+    steps:
+      # complete the steps for running automatic test- and buildprocesses
+      # 1) Checkout repository
+      # 2) SetUp JDK 17
+      # 3) Build with maven
+      # 4) Run tests with maven
+      # 5) Generate test-reports
+      # 6) Add artifact to your workflow

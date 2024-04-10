@@ -1,0 +1,44 @@
+### read clients
+GET http://localhost:8080/customer/list
+
+### create a new booking
+POST http://localhost:8080/booking/create
+Content-Type: application/json
+
+{
+  "customer_id": 1,
+  "apartments": [
+    {
+      "apartment_id": 1,
+      "date_from": "2023-06-08",
+      "date_to": "2023-06-15"
+    },
+    {
+      "apartment_id": 2,
+      "date_from": "2023-06-08",
+      "date_to": "2023-06-15"
+    }
+  ],
+  "packages": [
+    {
+      "package_id": 4,
+      "amount": 10,
+      "date_from": "2023-06-08",
+      "date_to": "2023-06-15"
+    },
+    {
+      "package_id": 3,
+      "amount": 10,
+      "date_from": "2023-06-08",
+      "date_to": "2023-06-15"
+    },
+    {
+      "package_id": 2,
+      "amount": 1,
+      "date_from": "2023-06-08",
+      "date_to": "2023-06-15"
+    }
+  ]
+}
+
+### complete with your requests
