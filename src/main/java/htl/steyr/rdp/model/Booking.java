@@ -21,14 +21,6 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "start", nullable = false)
-    @NonNull
-    private Date end;
-
-    @Column(name = "end", nullable = false)
-    @NonNull
-    private Date start;
-
     @Column(name = "price_per_day", nullable = false)
     @NonNull
     private Integer pricePerDay;

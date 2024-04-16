@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -16,6 +18,14 @@ public class SupplementaryPackageBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "start", nullable = false)
+    @NonNull
+    private Date end;
+
+    @Column(name = "end", nullable = false)
+    @NonNull
+    private Date start;
 
     @Column(name = "amount", nullable = false)
     @NonNull
