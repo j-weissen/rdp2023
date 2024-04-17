@@ -1,12 +1,14 @@
 package htl.steyr.rdp.model;
 
 
+import htl.steyr.rdp.utils.BillableBooking;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Data
@@ -14,7 +16,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "apartment_booking")
-public class ApartmentBooking {
+public class ApartmentBooking implements BillableBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -41,4 +43,8 @@ public class ApartmentBooking {
     @NonNull
     private Apartment apartment;
 
+    @Override
+    public int calculatePrice() {
+        return (int) ChronoUnit.DAYS.between(start.toInstant(), end.toInstant()) * apartment.getPricePerDay();
+    }
 }

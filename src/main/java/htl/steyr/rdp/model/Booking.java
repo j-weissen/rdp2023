@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -32,4 +31,10 @@ public class Booking {
     @OneToMany(mappedBy = "booking", orphanRemoval = true)
     @NonNull
     private Set<SupplementaryPackageBooking> supplementaryPackageBookings = new LinkedHashSet<>();
+
+    public double calculateTotalPrice() {
+        int apartmentsPrice = apartmentBookings.stream().map(ApartmentBooking::calculatePrice).reduce(0, Integer::sum);
+        int supplementaryPackagesPrice = supplementaryPackageBookings.stream().map(SupplementaryPackageBooking::calculatePrice).reduce(0, Integer::sum);
+        return ((double) apartmentsPrice + supplementaryPackagesPrice) / 100.00;
+    }
 }
