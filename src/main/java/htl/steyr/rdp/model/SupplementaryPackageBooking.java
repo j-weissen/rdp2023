@@ -40,7 +40,6 @@ public class SupplementaryPackageBooking implements BillableBooking {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "booking_id", nullable = false)
-    @NonNull
     private Booking booking;
 
     @Override

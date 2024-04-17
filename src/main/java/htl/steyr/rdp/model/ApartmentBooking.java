@@ -35,7 +35,6 @@ public class ApartmentBooking implements BillableBooking {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "booking_id")
-    @NonNull
     private Booking booking;
 
     @ManyToOne(optional = false)
