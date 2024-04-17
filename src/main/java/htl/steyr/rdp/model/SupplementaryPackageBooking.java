@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -21,13 +22,13 @@ public class SupplementaryPackageBooking implements BillableBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "start", nullable = false)
-    @NonNull
-    private Date end;
-
     @Column(name = "end", nullable = false)
     @NonNull
-    private Date start;
+    private LocalDate start;
+
+    @Column(name = "start", nullable = false)
+    @NonNull
+    private LocalDate end;
 
     @Column(name = "amount", nullable = false)
     @NonNull
@@ -44,6 +45,6 @@ public class SupplementaryPackageBooking implements BillableBooking {
 
     @Override
     public int calculatePrice() {
-        return (int) ChronoUnit.DAYS.between(start.toInstant(), end.toInstant()) * supplementaryPackage.getPrice();
+        return (int) ChronoUnit.DAYS.between(start, end) * supplementaryPackage.getPrice();
     }
 }

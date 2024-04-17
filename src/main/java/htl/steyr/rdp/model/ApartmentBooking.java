@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -23,15 +24,11 @@ public class ApartmentBooking implements BillableBooking {
 
     @Column(name = "start", nullable = false)
     @NonNull
-    private Date end;
+    private LocalDate start;
 
     @Column(name = "end", nullable = false)
     @NonNull
-    private Date start;
-
-    @Column(name = "amount", nullable = false)
-    @NonNull
-    private Integer amount;
+    private LocalDate end;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "booking_id")
@@ -44,6 +41,6 @@ public class ApartmentBooking implements BillableBooking {
 
     @Override
     public int calculatePrice() {
-        return (int) ChronoUnit.DAYS.between(start.toInstant(), end.toInstant()) * apartment.getPricePerDay();
+        return (int) ChronoUnit.DAYS.between(start, end) * apartment.getPricePerDay();
     }
 }
