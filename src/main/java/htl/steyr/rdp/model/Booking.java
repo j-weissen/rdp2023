@@ -22,11 +22,11 @@ public class Booking {
 
     @OneToMany(mappedBy = "booking", orphanRemoval = true)
     @NonNull
-    private Set<ApartmentBooking> apartmentBookings = new LinkedHashSet<>();
+    private Set<ApartmentBooking> apartmentBookings;
 
     @OneToMany(mappedBy = "booking", orphanRemoval = true)
     @NonNull
-    private Set<SupplementaryPackageBooking> supplementaryPackageBookings = new LinkedHashSet<>();
+    private Set<SupplementaryPackageBooking> supplementaryPackageBookings;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
