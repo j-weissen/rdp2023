@@ -26,7 +26,7 @@ public class Apartment {
 
     @Column(name = "max_guests", nullable = false)
     @NonNull
-    private String maxGuests;
+    private Integer maxGuests;
 
     @Column(name = "price_per_day", nullable = false)
     @NonNull
