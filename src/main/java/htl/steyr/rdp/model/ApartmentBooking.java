@@ -41,6 +41,7 @@ public class ApartmentBooking implements BillableBooking {
 
     @Override
     public int calculatePrice() {
-        return (int) ChronoUnit.DAYS.between(start, end) * apartment.getPricePerDay();
+        long days = ChronoUnit.DAYS.between(start, end) + 1;
+        return (int) days * apartment.getPricePerDay();
     }
 }

@@ -45,6 +45,7 @@ public class SupplementaryPackageBooking implements BillableBooking {
 
     @Override
     public int calculatePrice() {
-        return (int) ChronoUnit.DAYS.between(start, end) * supplementaryPackage.getPrice();
+        long days = ChronoUnit.DAYS.between(start, end) + 1;
+        return (int) days * amount * supplementaryPackage.getPrice();
     }
 }
