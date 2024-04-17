@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -20,4 +23,8 @@ public class Customer {
     @Column(name = "name", nullable = false)
     @NonNull
     private String name;
+
+    @OneToMany(mappedBy = "customer", orphanRemoval = true)
+    private Set<Booking> bookings = new LinkedHashSet<>();
+
 }

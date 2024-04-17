@@ -20,10 +20,6 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "price_per_day", nullable = false)
-    @NonNull
-    private Integer pricePerDay;
-
     @OneToMany(mappedBy = "booking", orphanRemoval = true)
     @NonNull
     private Set<ApartmentBooking> apartmentBookings = new LinkedHashSet<>();
@@ -31,6 +27,11 @@ public class Booking {
     @OneToMany(mappedBy = "booking", orphanRemoval = true)
     @NonNull
     private Set<SupplementaryPackageBooking> supplementaryPackageBookings = new LinkedHashSet<>();
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    @NonNull
+    private Customer customer;
 
     public double calculateTotalPrice() {
         int apartmentsPrice = apartmentBookings.stream().map(ApartmentBooking::calculatePrice).reduce(0, Integer::sum);
