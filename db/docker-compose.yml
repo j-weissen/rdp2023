@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: db_rdp
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password --log_bin_trust_function_creators=1
+    environment:
+      MYSQL_ROOT_PASSWORD: rdp
+      MYSQL_DATABASE: rdp
+      MYSQL_USER: rdp
+      MYSQL_PASSWORD: rdp
+    ports:
+      - '4306:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  test-database:
+    container_name: db_test_rdp
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password --log_bin_trust_function_creators=1
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - '5306:3306'
+    volumes:
+      - ./testmysql:/var/lib/mysql
+
