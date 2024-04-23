@@ -16,10 +16,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DB_DATABASE: test
-      DB_PASSWORD: test
-      DB_USER: test
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -33,7 +29,6 @@ jobs:
       uses: isbang/compose-action@v1.5.1
       with:
         compose-file: db/docker-compose.yml
-
 
     - name: Build with Maven
       run: mvn -B package -DskipTests=true -file pom.xml
