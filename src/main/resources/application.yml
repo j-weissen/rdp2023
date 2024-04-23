@@ -10,3 +10,6 @@ spring:
     url: jdbc:mysql://localhost:4306/rdp
     username: rdp
     password: rdp
+server:
+  error:
+    include-message: always
