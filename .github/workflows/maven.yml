@@ -40,9 +40,6 @@ jobs:
     - name: Run Spring tests
       run: mvn test
 
-    - name: show test reports
-      run: ls target/surefire-reports
-
     - name: Report
       uses: dorny/test-reporter@v1
       if: always()
