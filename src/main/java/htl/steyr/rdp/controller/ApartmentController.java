@@ -1,7 +1,7 @@
 package htl.steyr.rdp.controller;
 
-import htl.steyr.rdp.model.Apartment;
-import htl.steyr.rdp.service.AparmentService;
+import htl.steyr.rdp.dto.response.ApartmentResponseDto;
+import htl.steyr.rdp.service.ApartmentService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -22,17 +21,21 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ApartmentController {
     @NonNull
-    private final AparmentService apartmentService;
+    private final ApartmentService apartmentService;
 
     @GetMapping("/available/{start}/{end}")
-    public String /*ResponseEntity<Set<Apartment>>*/ available(@PathVariable String start, @PathVariable String end) {
+    public ResponseEntity<Set<ApartmentResponseDto>> available(@PathVariable String start, @PathVariable String end) {
+        LocalDate startDate, endDate;
         try {
-            LocalDate startDate = LocalDate.parse(start);
-            LocalDate endDate = LocalDate.parse(end);
+            startDate = LocalDate.parse(start);
+            endDate = LocalDate.parse(end);
         } catch (DateTimeParseException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Malformed date", e);
         }
-
-        return "happy happy happy";
+        Set<ApartmentResponseDto> response = apartmentService.getAvailableBetween(startDate, endDate);
+        if (response == null) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong while retrieving apartments from the database");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

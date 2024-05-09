@@ -1,7 +1,6 @@
 ### get available apartments
 GET http://localhost:8080/apartment/available/2024-01-01/2024-12-31
 
-
 ### create a new booking
 POST http://localhost:8080/booking/create
 Content-Type: application/json

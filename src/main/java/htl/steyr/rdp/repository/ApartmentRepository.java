@@ -8,6 +8,14 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public interface ApartmentRepository extends JpaRepository<Apartment, Integer> {
-    @Query("SELECT ab.apartment FROM ApartmentBooking ab WHERE NOT ((ab.start <= :end) AND (ab.end >= :start))")
-    public Set<Apartment> findAvailableBetween(LocalDate start, LocalDate end);
+    @Query("""
+            SELECT a
+            FROM Apartment a
+            WHERE a.id NOT IN (
+                SELECT ab.apartment.id
+                FROM ApartmentBooking ab
+                WHERE (ab.start <= :start AND ab.end >= :end)
+            )
+            """)
+    Set<Apartment> findAvailableBetween(LocalDate start, LocalDate end);
 }
