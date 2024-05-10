@@ -38,7 +38,7 @@ public class SupplementaryPackageBooking implements BillableBooking {
     @NonNull
     private SupplementaryPackage supplementaryPackage;
 
-    @ManyToOne(optional = false)
+    @ManyToOne()
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 

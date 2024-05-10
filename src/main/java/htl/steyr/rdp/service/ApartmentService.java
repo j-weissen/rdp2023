@@ -26,7 +26,7 @@ public class ApartmentService {
     @NonNull
     private final ApartmentRepository apartmentRepository;
 
-    public Set<ApartmentResponseDto> getAvailableBetween(LocalDate start, LocalDate end) {
+    public List<ApartmentResponseDto> getAvailableBetween(LocalDate start, LocalDate end) {
         return toDtos(apartmentRepository.findAvailableBetween(start, end));
     }
 
@@ -34,8 +34,8 @@ public class ApartmentService {
         return new ApartmentResponseDto(apartment.getId(), apartment.getName(), apartment.getMaxGuests(), apartment.getPricePerDay().floatValue() / 100, apartment.getCategory());
     }
 
-    public Set<ApartmentResponseDto> toDtos(Set<Apartment> apartments) {
-        return apartments.stream().map(this::toDto).collect(Collectors.toSet());
+    public List<ApartmentResponseDto> toDtos(List<Apartment> apartments) {
+        return apartments.stream().map(this::toDto).toList();
     }
 
     public ApartmentBooking fromDto(ApartmentBookingRequestDto dto) {

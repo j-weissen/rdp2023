@@ -29,7 +29,7 @@ public class ApartmentBooking implements BillableBooking {
     @NonNull
     private LocalDate end;
 
-    @ManyToOne(optional = false)
+    @ManyToOne()
     @JoinColumn(name = "booking_id")
     private Booking booking;
 

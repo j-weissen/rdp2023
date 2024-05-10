@@ -2,16 +2,14 @@ package htl.steyr.rdp.model;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "booking")
 public class Booking {
@@ -19,17 +17,14 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "booking", orphanRemoval = true)
-    @NonNull
+    @OneToMany(mappedBy = "booking")
     private Set<ApartmentBooking> apartmentBookings;
 
-    @OneToMany(mappedBy = "booking", orphanRemoval = true)
-    @NonNull
+    @OneToMany(mappedBy = "booking")
     private Set<SupplementaryPackageBooking> supplementaryPackageBookings;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
-    @NonNull
     private Customer customer;
 
     public double calculateTotalPrice() {

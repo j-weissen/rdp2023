@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -24,7 +25,7 @@ public class ApartmentController {
     private final ApartmentService apartmentService;
 
     @GetMapping("/available/{start}/{end}")
-    public ResponseEntity<Set<ApartmentResponseDto>> available(@PathVariable String start, @PathVariable String end) {
+    public ResponseEntity<List<ApartmentResponseDto>> available(@PathVariable String start, @PathVariable String end) {
         LocalDate startDate, endDate;
         try {
             startDate = LocalDate.parse(start);
@@ -32,7 +33,7 @@ public class ApartmentController {
         } catch (DateTimeParseException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Malformed date", e);
         }
-        Set<ApartmentResponseDto> response = apartmentService.getAvailableBetween(startDate, endDate);
+        List<ApartmentResponseDto> response = apartmentService.getAvailableBetween(startDate, endDate);
         if (response == null) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong while retrieving apartments from the database");
         }
