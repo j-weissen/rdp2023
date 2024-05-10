@@ -1,6 +1,5 @@
 package htl.steyr.rdp.service;
 
-import htl.steyr.rdp.dto.CategoryDto;
 import htl.steyr.rdp.model.Category;
 import htl.steyr.rdp.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;

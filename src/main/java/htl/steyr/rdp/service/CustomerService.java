@@ -1,6 +1,5 @@
 package htl.steyr.rdp.service;
 
-import htl.steyr.rdp.dto.CustomerDto;
 import htl.steyr.rdp.model.Customer;
 import htl.steyr.rdp.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
